@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:stack_smart_home/ui/temperature_widget.dart';
 import 'package:stack_smart_home/utils/app_utils.dart';
 import 'package:stack_smart_home/utils/color.dart';
 import 'package:stack_smart_home/utils/costants.dart';
@@ -98,10 +99,7 @@ class HomeWidget extends StatelessWidget {
                     style: regular.size20.primaryColor,
                   ),
                   verticalSpace(16.0),
-                  Text(
-                    "23",
-                    style: bold.size36.primaryColor,
-                  )
+                  const TemperatureWidget(),
                 ],
               ),
               isTransparent: false,
@@ -125,8 +123,11 @@ class HomeWidget extends StatelessWidget {
                 ],
               ),
             ),
+            /// Music player
             CardWidget(
-              childWidget: Container(),
+              childWidget: Container(
+
+              ),
             ),
             CardWidget(
               childWidget: Container(),
