@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stack_smart_home/ui/bottom_sheet_widget.dart';
 import 'package:stack_smart_home/ui/music_player_widget.dart';
 import 'package:stack_smart_home/ui/temperature_widget.dart';
 import 'package:stack_smart_home/utils/app_utils.dart';
@@ -25,7 +26,7 @@ class HomeWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _greetingSection(),
-            _roomSectionGridView(),
+            _roomSectionGridView(context),
             _statisticsSection()
           ],
         ),
@@ -77,14 +78,17 @@ class HomeWidget extends StatelessWidget {
     );
   }
 
-  Widget _roomSectionGridView() {
+  Widget _roomSectionGridView(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         verticalSpace(32.0),
-        Text(StringConstants.livingRoom, style: regular.size20,),
+        Text(
+          StringConstants.livingRoom,
+          style: regular.size20,
+        ),
         verticalSpace(16.0),
         Flexible(
           flex: 3,
@@ -95,19 +99,21 @@ class HomeWidget extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: CardWidget(
-                  childWidget: SizedBox(
-                    height: 180,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          StringConstants.homeTemperature,
-                          style: regular.size20.primaryColor,
-                        ),
-                        verticalSpace(16.0),
-                        const TemperatureWidget(),
-                      ],
+                  childWidget: BottomSheetMy(
+                    child: SizedBox(
+                      height: 180,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            StringConstants.homeTemperature,
+                            style: regular.size20.primaryColor,
+                          ),
+                          verticalSpace(16.0),
+                          const TemperatureWidget(),
+                        ],
+                      ),
                     ),
                   ),
                   isTransparent: false,
@@ -133,7 +139,8 @@ class HomeWidget extends StatelessWidget {
                             const Icon(Icons.keyboard_arrow_right_sharp,
                                 color: BrandColor.white),
                           ],
-                        )
+                        ),
+                        verticalSpace(24),
                       ],
                     ),
                   ),
@@ -152,18 +159,13 @@ class HomeWidget extends StatelessWidget {
               const Flexible(
                 flex: 1,
                 child: CardWidget(
-                    childWidget: SizedBox(
-                        height: 120,
-                        child: MusicPlayer())
-                ),
+                    childWidget: SizedBox(height: 120, child: MusicPlayer())),
               ),
               horizontalSpace(16.0),
               Flexible(
                 flex: 1,
                 child: CardWidget(
-                  childWidget: SizedBox(
-                      height: 120,
-                      child: Container()),
+                  childWidget: SizedBox(height: 120, child: Container()),
                 ),
               ),
             ],
@@ -223,5 +225,34 @@ class HomeWidget extends StatelessWidget {
 
   Widget _statisticsSection() {
     return Container();
+  }
+}
+
+class BottomSheetMy extends StatelessWidget {
+ final Widget? child;
+  const BottomSheetMy({Key? key,this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+        showModalBottomSheet(
+            context: context,
+            isDismissible: true,
+            builder: (context) {
+              return DraggableScrollableSheet(
+                initialChildSize: 0.95,
+                maxChildSize: 0.98,
+                minChildSize: 0.75,
+                builder: (context, scrollController) {
+                  return const BottomSheetWidget();
+                },
+              );
+            },
+            backgroundColor: Colors.transparent,
+        );
+      },
+      child: child
+    );
   }
 }

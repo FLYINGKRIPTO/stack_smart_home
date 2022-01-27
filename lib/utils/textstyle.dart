@@ -34,6 +34,8 @@ extension StyleExt on TextStyle {
 
   TextStyle get primaryColor => copyWith(color: BrandColor.primaryColor);
 
+  TextStyle get colorGrey => copyWith(color: "#939399".fromHexToColor());
+
   TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
 }
 
@@ -48,5 +50,12 @@ const bold = TextStyle(
   color: BrandColor.white,
   fontSize: 14,
   fontWeight: FontWeight.w700,
+  fontStyle: FontStyle.normal,
+);
+
+const medium = TextStyle(
+  color: BrandColor.white,
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
 );
