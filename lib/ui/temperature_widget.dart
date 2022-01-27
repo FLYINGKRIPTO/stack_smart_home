@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:flutter_riverpod/src/provider.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/utils/color.dart';
@@ -28,38 +29,72 @@ class _TemperatureWidgetState extends State<TemperatureWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FutureBuilder<String>(
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
+        Consumer(
+          builder: (context, watch, child) {
+            AsyncValue<int> value = watch(getCurrentTemperatureStreamProviderd);
+            return value.when(data: (value) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    snapshot.data ?? "",
+                    "$value",
                     style: bold.size40.primaryColor,
                   ),
                   horizontalSpace(8.0),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Text(
-                      snapshot.hasData? "°C": "",
-                      style: regular.size24.primaryColor,
+                  GestureDetector(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 4.0),
+                      child: Text(
+                        "°C",
+                        style: regular.size24.primaryColor,
+                      ),
                     ),
+                    onTap: (){
+                      _homeScreenView.changeTemperature();
+                    },
                   ),
                 ],
               );
-            }
-            return const CircularProgressIndicator(
+            }, loading: () =>
+            const CircularProgressIndicator(
               color: BrandColor.accent,
-            );
+            ), error: (error, stacktrace) {
+              return const Text("Error");
+            });
           },
-          future: _homeScreenView.getTemperature(),
         ),
+        // FutureBuilder<int>(
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasData && snapshot.data != null) {
+        //       return Row(
+        //         crossAxisAlignment: CrossAxisAlignment.end,
+        //         children: [
+        //           Text(
+        //             snapshot.hasData ? "${snapshot.data}" : "24",
+        //             style: bold.size40.primaryColor,
+        //           ),
+        //           horizontalSpace(8.0),
+        //           Padding(
+        //             padding: const EdgeInsets.only(bottom: 4.0),
+        //             child: Text(
+        //               snapshot.hasData ? "°C" : "",
+        //               style: regular.size24.primaryColor,
+        //             ),
+        //           ),
+        //         ],
+        //       );
+        //     }
+        //     return const CircularProgressIndicator(
+        //       color: BrandColor.accent,
+        //     );
+        //   },
+        //   future: _homeScreenView.getTemperature(),
+        // ),
         verticalSpace(24.0),
         CupertinoSwitch(
           value: _homeScreenView.homeTemperatureToggle,
           activeColor: BrandColor.accent,
-          onChanged: (value){
+          onChanged: (value) {
             setState(() {
               _homeScreenView.setHomeTemperatureToggle(value);
             });

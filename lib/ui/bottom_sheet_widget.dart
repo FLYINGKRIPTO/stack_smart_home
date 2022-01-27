@@ -8,11 +8,19 @@ import 'package:stack_smart_home/utils/costants.dart';
 import 'package:stack_smart_home/utils/extensions.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
+import 'package:stack_smart_home/view/home_view.dart';
 
 import 'common_widget.dart';
 
-class BottomSheetWidget extends StatelessWidget {
+class BottomSheetWidget extends StatefulWidget {
   const BottomSheetWidget({Key? key}) : super(key: key);
+
+  @override
+  State<BottomSheetWidget> createState() => _BottomSheetWidgetState();
+}
+
+class _BottomSheetWidgetState extends State<BottomSheetWidget> {
+  late HomeScreenView _homeScreenView;
 
   @override
   Widget build(BuildContext context) {
@@ -233,5 +241,4 @@ class BottomSheetWidget extends StatelessWidget {
       ),
     );
   }
-
 }

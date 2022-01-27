@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
+import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/ui/common_widget.dart';
 import 'package:stack_smart_home/ui/ticket_painter.dart';
-import 'package:stack_smart_home/utils/space.dart';
-import 'package:stack_smart_home/utils/textstyle.dart';
 import '../utils/color.dart';
 
 class MeterWidget extends StatelessWidget {
@@ -15,10 +13,10 @@ class MeterWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          left: 20,
-          top: 20,
-          right: 20,
-          bottom: 20,
+          left: 30,
+          top: 30,
+          right: 30,
+          bottom: 30,
           child: Container(
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
@@ -26,19 +24,19 @@ class MeterWidget extends StatelessWidget {
                 boxShadow: const [
                   BoxShadow(
                     offset: Offset(2, 2),
-                    blurRadius: 12,
-                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                    blurRadius: 18,
+                    color: Color.fromRGBO(0, 0, 0, 0.25),
                   ),
                 ]),
-            height: 160,
-            width: 160,
+            height: 180,
+            width: 180,
           ),
         ),
         Positioned(
-          left: 40,
-          top: 40,
-          right: 40,
-          bottom: 40,
+          left: 45,
+          top: 45,
+          right: 45,
+          bottom: 45,
           child: Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -46,15 +44,30 @@ class MeterWidget extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   offset: Offset(2, 2),
-                  blurRadius: 12,
-                  color: Color.fromRGBO(0, 0, 0, 0.1),
+                  blurRadius: 24,
+                  color: Color.fromRGBO(0, 0, 0, 0.15),
                 ),
               ],
             ),
-            height: 100,
-            width: 100,
+            height: 120,
+            width: 120,
             child: Center(
-                child: temperatureTextWidget(temperature: "24", center: true)),
+                child:
+                Consumer(
+                  builder: (context, watch, child) {
+                    AsyncValue<int> value = watch(getCurrentTemperatureStreamProviderd);
+                    return value.when(data: (value) {
+                      return temperatureTextWidget(temperature: "$value", center: true);
+                    }, loading: () =>
+                    const CircularProgressIndicator(
+                      color: BrandColor.accent,
+                    ), error: (error, stacktrace) {
+                      return const Text("Error");
+                    });
+                  },
+                ),
+
+            ),
           ),
         ),
         Center(
@@ -72,10 +85,12 @@ class MeterWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(top: 12.0),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 const Icon(
                   Icons.arrow_drop_up,
                   color: BrandColor.primaryColor,
+                  size: 32,
                 ),
                 Container(
                   width: 5,

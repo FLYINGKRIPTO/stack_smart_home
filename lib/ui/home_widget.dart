@@ -99,7 +99,7 @@ class HomeWidget extends StatelessWidget {
               Flexible(
                 flex: 1,
                 child: CardWidget(
-                  childWidget: BottomSheetMy(
+                  childWidget: RoomBottomSheet(
                     child: SizedBox(
                       height: 180,
                       child: Column(
@@ -180,10 +180,10 @@ class HomeWidget extends StatelessWidget {
   }
 }
 
-class BottomSheetMy extends StatelessWidget {
+class RoomBottomSheet extends StatelessWidget {
   final Widget? child;
 
-  const BottomSheetMy({Key? key, this.child}) : super(key: key);
+  const RoomBottomSheet({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

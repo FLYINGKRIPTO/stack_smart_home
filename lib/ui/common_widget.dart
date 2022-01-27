@@ -15,7 +15,7 @@ Widget temperatureTextWidget({required String temperature,bool center = false}) 
       horizontalSpace(4.0),
       Text(
         "°C",
-        style: regular.size16.primaryColor,
+        style: medium.size16.primaryColor,
       )
     ],
   );
