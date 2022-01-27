@@ -11,4 +11,5 @@ class StringConstants {
   static const currentHumidity = "Current humidity";
   static const currentTemp = "Current temp";
   static const degreeCelcius = "°C";
+  static const samsung ="Samsung UA55 4AC";
 }

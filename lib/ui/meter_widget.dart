@@ -23,7 +23,7 @@ class MeterWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left:  8.0),
+                padding: const EdgeInsets.only(right: 8.0),
                 child: temperatureTextWidget2(temperature: "14"),
               ),
               Container(

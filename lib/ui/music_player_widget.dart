@@ -4,6 +4,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stack_smart_home/utils/color.dart';
+import 'package:stack_smart_home/utils/jpg_icons.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
 
@@ -26,6 +27,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         StreamBuilder<Playing?>(
           builder: (context, snapshot) {
@@ -41,6 +43,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
           },
           stream: _assetsAudioPlayer.current,
         ),
+        verticalSpace(16.0),
         playerControlWidget(
           onPreviousPressed: () {
             _assetsAudioPlayer.previous();
@@ -90,6 +93,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           icon: const Icon(
                             Icons.pause,
                             color: BrandColor.white,
+                            size: 28,
                           ),
                           onPressed: onPlayPausePressed,
                         )
@@ -97,12 +101,14 @@ class _MusicPlayerState extends State<MusicPlayer> {
                           icon: const Icon(
                             Icons.play_arrow,
                             color: BrandColor.white,
+                            size: 28,
                           ),
                           onPressed: onPlayPausePressed,
                         ),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      border: Border.all(color: BrandColor.white)),
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: "#B3AFAC".fromHexToColor().withOpacity(0.6),
+                  ),
                 ),
               ),
             );
@@ -133,6 +139,12 @@ class _MusicPlayerState extends State<MusicPlayer> {
             height: 30,
             width: 30,
             fit: BoxFit.cover,
+            loadingBuilder: (context, f, g) => Image.asset(
+              JpgIcons.background,
+              height: 30,
+              width: 30,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         horizontalSpace(8.0),
@@ -143,11 +155,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
             children: [
               Text(
                 songName,
-                style: regular.size12,
+                style: regular.size14,
               ),
               Text(
                 artistName,
-                style: regular.size10,
+                style: regular.size12,
               ),
             ],
           ),

@@ -1,3 +1,3 @@
 class JpgIcons {
-  static const background = "assets/jpg/bg.jpeg";
+  static const background = "assets/jpg/backgro.jpeg";
 }

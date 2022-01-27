@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stack_smart_home/ui/bottom_sheet_widget.dart';
 import 'package:stack_smart_home/ui/music_player_widget.dart';
 import 'package:stack_smart_home/ui/plug_wall_widget.dart';
 import 'package:stack_smart_home/ui/smart_tv_widget.dart';
+import 'package:stack_smart_home/ui/statistics_widget.dart';
 import 'package:stack_smart_home/ui/temperature_widget.dart';
 import 'package:stack_smart_home/utils/app_utils.dart';
 import 'package:stack_smart_home/utils/color.dart';
@@ -29,6 +28,7 @@ class HomeWidget extends StatelessWidget {
           children: [
             _greetingSection(),
             _roomSectionGridView(context),
+            verticalSpace(24.0),
             _statisticsSection()
           ],
         ),
@@ -156,6 +156,25 @@ class HomeWidget extends StatelessWidget {
   }
 
   Widget _statisticsSection() {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Statistics",
+              style: regular.size16,
+            ),
+            Text(
+              "Month",
+              style: regular.size16.colorGrey,
+            ),
+          ],
+        ),
+        verticalSpace(12.0),
+        CardWidget(childWidget: StatisticsWidget())
+      ],
+    );
   }
 }

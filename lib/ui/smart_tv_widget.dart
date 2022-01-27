@@ -41,7 +41,7 @@ class _SmartTvWidgetState extends State<SmartTvWidget> {
               ),
               verticalSpace(4.0),
               Text(
-                "Samsung UA55 4AC",
+                StringConstants.samsung,
                 style:
                     regular.size12.copyWith(color: "#E3E0E0".fromHexToColor()),
               )
