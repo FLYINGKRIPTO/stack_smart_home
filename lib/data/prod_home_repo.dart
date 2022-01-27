@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 class ProdHomeRepo extends HomeRepo {
 
   late BehaviorSubject<int> _currrentTemp;
+  late BehaviorSubject<bool> _currentToggleValue;
 
   ProdHomeRepo(){
     init();
@@ -13,8 +14,8 @@ class ProdHomeRepo extends HomeRepo {
 
   @override
   dispose() {
-    // TODO: implement dispose
-    throw UnimplementedError();
+   _currrentTemp.close();
+   _currentToggleValue.close();
   }
 
   @override
@@ -26,11 +27,7 @@ class ProdHomeRepo extends HomeRepo {
   @override
   init() {
     _currrentTemp = BehaviorSubject.seeded(23);
-  }
-
-  @override
-  Stream<int> getCurrentTemperature() {
-   return _currrentTemp;
+    _currentToggleValue = BehaviorSubject.seeded(true);
   }
 
   @override
@@ -42,6 +39,17 @@ class ProdHomeRepo extends HomeRepo {
   @override
   StreamController<int> getCurrentTemperatureStream() {
     return _currrentTemp;
+  }
+
+  @override
+  StreamController<bool> getToggleHomeTemperatureValue() {
+    return _currentToggleValue;
+  }
+
+  @override
+  Future<bool> changeHomeTempToggle(bool value) {
+    _currentToggleValue.value = value;
+    return Future.value(true);
   }
 }
 

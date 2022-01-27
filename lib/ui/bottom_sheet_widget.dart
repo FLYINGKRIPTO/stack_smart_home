@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/ui/meter_widget.dart';
 import 'package:stack_smart_home/utils/color.dart';
 import 'package:stack_smart_home/utils/costants.dart';
@@ -21,6 +23,12 @@ class BottomSheetWidget extends StatefulWidget {
 
 class _BottomSheetWidgetState extends State<BottomSheetWidget> {
   late HomeScreenView _homeScreenView;
+
+  @override
+  void initState() {
+    _homeScreenView = context.read(homeScreenViewProvider);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,13 +77,23 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                       )
                     ],
                   ),
-                  CupertinoSwitch(
-                    value: true,
-                    activeColor: BrandColor.accent,
-                    onChanged: (value) {
-                      // setState(() {
-                      //   _homeScreenView.setHomeTemperatureToggle(value);
-                      // });
+                  Consumer(
+                    builder: (context, watch, child) {
+                      AsyncValue<bool> value = watch(getCurrentToggleValueStream);
+                      return value.when(data: (value) {
+                        return CupertinoSwitch(
+                          value: value,
+                          activeColor: BrandColor.accent,
+                          onChanged: (value) {
+                            _homeScreenView.toggleHomeTemp(value);
+                          },
+                        );
+                      }, loading: () =>
+                      const CircularProgressIndicator(
+                        color: BrandColor.accent,
+                      ), error: (error, stacktrace) {
+                        return const Text("Error");
+                      });
                     },
                   ),
                 ],

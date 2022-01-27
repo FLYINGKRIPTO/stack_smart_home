@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/src/provider.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/utils/color.dart';
@@ -63,43 +63,27 @@ class _TemperatureWidgetState extends State<TemperatureWidget> {
             });
           },
         ),
-        // FutureBuilder<int>(
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData && snapshot.data != null) {
-        //       return Row(
-        //         crossAxisAlignment: CrossAxisAlignment.end,
-        //         children: [
-        //           Text(
-        //             snapshot.hasData ? "${snapshot.data}" : "24",
-        //             style: bold.size40.primaryColor,
-        //           ),
-        //           horizontalSpace(8.0),
-        //           Padding(
-        //             padding: const EdgeInsets.only(bottom: 4.0),
-        //             child: Text(
-        //               snapshot.hasData ? "°C" : "",
-        //               style: regular.size24.primaryColor,
-        //             ),
-        //           ),
-        //         ],
-        //       );
-        //     }
-        //     return const CircularProgressIndicator(
-        //       color: BrandColor.accent,
-        //     );
-        //   },
-        //   future: _homeScreenView.getTemperature(),
-        // ),
         verticalSpace(24.0),
-        CupertinoSwitch(
-          value: _homeScreenView.homeTemperatureToggle,
-          activeColor: BrandColor.accent,
-          onChanged: (value) {
-            setState(() {
-              _homeScreenView.setHomeTemperatureToggle(value);
+        Consumer(
+          builder: (context, watch, child) {
+            AsyncValue<bool> value = watch(getCurrentToggleValueStream);
+            return value.when(data: (value) {
+              return CupertinoSwitch(
+                value: value,
+                activeColor: BrandColor.accent,
+                onChanged: (value) {
+                  _homeScreenView.toggleHomeTemp(value);
+                },
+              );
+            }, loading: () =>
+            const CircularProgressIndicator(
+              color: BrandColor.accent,
+            ), error: (error, stacktrace) {
+              return const Text("Error");
             });
           },
         ),
+
       ],
     );
   }
