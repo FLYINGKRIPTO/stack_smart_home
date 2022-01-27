@@ -228,12 +228,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 children: [
                   Text(featureName.title),
                   horizontalSpace(4.0),
-                  Container(
-                    width: 5,
-                    height: 5,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: featureName.color),
-                  ),
+                  dot(color: featureName.color),
                 ],
               ),
               verticalSpace(12.0),

@@ -18,6 +18,7 @@ class BrandColor {
   static const Color grey = Color(0xff87878e);
   static const Color white = Color(0xfff5f5f6);
   static const Color accent = Color(0xffff9b75);
+  static const Color barColor = Color(0xffA29996);
 }
 
 extension OacityExt on Color {

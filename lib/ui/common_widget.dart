@@ -46,11 +46,12 @@ Widget temperatureTextWidget2(
   );
 }
 
-Widget dot({required Color color}) {
+Widget dot({required Color? color}) {
   return Container(
     width: 5,
     height: 5,
-    decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+    decoration: BoxDecoration(
+        shape: BoxShape.circle, color: color ?? BrandColor.primaryColor),
   );
 }
 
@@ -64,7 +65,8 @@ Widget cardHeadingWidget({required String name, VoidCallback? onPressed}) {
       ),
       GestureDetector(
           onTap: () => onPressed,
-          child: const Icon(Icons.keyboard_arrow_right_sharp, color: BrandColor.white)),
+          child: const Icon(Icons.keyboard_arrow_right_sharp,
+              color: BrandColor.white)),
     ],
   );
 }

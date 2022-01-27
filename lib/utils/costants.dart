@@ -12,4 +12,7 @@ class StringConstants {
   static const currentTemp = "Current temp";
   static const degreeCelcius = "°C";
   static const samsung ="Samsung UA55 4AC";
+  static const electricity= "Electricity Usage";
+  static const statistics = "Statistics";
+  static const month = "Month";
 }

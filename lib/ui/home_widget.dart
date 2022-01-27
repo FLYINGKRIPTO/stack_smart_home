@@ -163,11 +163,11 @@ class HomeWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Statistics",
+              StringConstants.statistics,
               style: regular.size16,
             ),
             Text(
-              "Month",
+              StringConstants.month,
               style: regular.size16.colorGrey,
             ),
           ],

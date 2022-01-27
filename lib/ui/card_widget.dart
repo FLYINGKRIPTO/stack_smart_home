@@ -12,19 +12,6 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Positioned.fill(
-        //   child: Center(
-        //     child: BackdropFilter(
-        //       filter: ImageFilter.blur(
-        //         sigmaX: 1.0,
-        //         sigmaY: 1.0,
-        //       ),
-        //       child: Container(
-        //         color: Colors.white.withOpacity(0.2),
-        //       ),
-        //     ),
-        //   ),
-        // ),
         Container(
           padding: const EdgeInsets.all(16.0),
           child: childWidget,
@@ -46,7 +33,6 @@ class CardWidget extends StatelessWidget {
             ),
           ),
         ),
-
       ],
     );
   }
