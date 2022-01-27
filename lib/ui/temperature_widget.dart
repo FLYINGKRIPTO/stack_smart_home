@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/src/provider.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
+import 'package:stack_smart_home/ui/view/home_view.dart';
 import 'package:stack_smart_home/utils/color.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
-import 'package:stack_smart_home/view/home_view.dart';
 
 class TemperatureWidget extends StatefulWidget {
   const TemperatureWidget({Key? key}) : super(key: key);

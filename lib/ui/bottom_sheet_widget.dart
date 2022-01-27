@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/ui/meter_widget.dart';
+import 'package:stack_smart_home/ui/view/home_view.dart';
 import 'package:stack_smart_home/utils/color.dart';
 import 'package:stack_smart_home/utils/costants.dart';
 import 'package:stack_smart_home/utils/extensions.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
-import 'package:stack_smart_home/view/home_view.dart';
 
 import 'common_widget.dart';
 
