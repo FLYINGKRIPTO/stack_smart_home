@@ -96,28 +96,31 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                         style: bold.size26.primaryColor,
                       ),
                       Text(
-                        "Home temperature",
+                        StringConstants.homeTemperature,
                         style: regular.size16.primaryColor,
                       )
                     ],
                   ),
                   Consumer(
                     builder: (context, watch, child) {
-                      AsyncValue<bool> value = watch(getCurrentToggleValueStream);
-                      return value.when(data: (value) {
-                        return CupertinoSwitch(
-                          value: value,
-                          activeColor: BrandColor.accent,
-                          onChanged: (value) {
-                            _homeScreenView.toggleHomeTemp(value);
+                      AsyncValue<bool> value =
+                          watch(getCurrentToggleValueStream);
+                      return value.when(
+                          data: (value) {
+                            return CupertinoSwitch(
+                              value: value,
+                              activeColor: BrandColor.accent,
+                              onChanged: (value) {
+                                _homeScreenView.toggleHomeTemp(value);
+                              },
+                            );
                           },
-                        );
-                      }, loading: () =>
-                      const CircularProgressIndicator(
-                        color: BrandColor.accent,
-                      ), error: (error, stacktrace) {
-                        return const Text("Error");
-                      });
+                          loading: () => const CircularProgressIndicator(
+                                color: BrandColor.accent,
+                              ),
+                          error: (error, stacktrace) {
+                            return const Text("Error");
+                          });
                     },
                   ),
                 ],
@@ -129,15 +132,16 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   currentStateWidget(
-                      heading: "Current temp",
+                      heading: StringConstants.currentTemp,
                       icon: Icons.arrow_drop_up_outlined,
                       value: "24 ",
-                      symbol: "°C"),
+                      symbol: StringConstants.degreeCelcius),
                   currentStateWidget(
-                      heading: "Current humidity",
-                      icon: Icons.arrow_drop_up_outlined,
-                      value: "54 ",
-                      symbol: "%"),
+                      heading: StringConstants.currentHumidity,
+                      icon: Icons.arrow_drop_down_outlined,
+                      value: "54",
+                      symbol: "%",
+                      allignEnd: true),
                 ],
               ),
               verticalSpace(16.0),
@@ -178,9 +182,11 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
     required IconData icon,
     required String value,
     required String symbol,
+    bool allignEnd = false,
   }) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment:
+          allignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
         Text(
           heading,

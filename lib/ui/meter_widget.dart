@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/all.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/ui/common_widget.dart';
 import 'package:stack_smart_home/ui/ticket_painter.dart';
+import 'package:stack_smart_home/utils/costants.dart';
+import 'package:stack_smart_home/utils/textstyle.dart';
 import '../utils/color.dart';
 
 class MeterWidget extends StatelessWidget {
@@ -17,19 +19,32 @@ class MeterWidget extends StatelessWidget {
           top: 30,
           right: 30,
           bottom: 30,
-          child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: "#F9F9F9".fromHexToColor(),
-                boxShadow: const [
-                  BoxShadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 18,
-                    color: Color.fromRGBO(0, 0, 0, 0.25),
-                  ),
-                ]),
-            height: 180,
-            width: 180,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left:  8.0),
+                child: temperatureTextWidget2(temperature: "14"),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: "#F9F9F9".fromHexToColor(),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset(2, 2),
+                        blurRadius: 18,
+                        color: Color.fromRGBO(0, 0, 0, 0.25),
+                      ),
+                    ]),
+                height: 190,
+                width: 190,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left:  8.0),
+                child: temperatureTextWidget2(temperature: "28"),
+              ),
+            ],
           ),
         ),
         Positioned(

@@ -8,5 +8,7 @@ class StringConstants {
   static const homeTemperature = "Home Temperature";
   static const livingRoom = "Living Room";
   static const smartTv= "Smart Tv";
-
+  static const currentHumidity = "Current humidity";
+  static const currentTemp = "Current temp";
+  static const degreeCelcius = "°C";
 }
