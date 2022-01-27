@@ -14,6 +14,30 @@ import 'package:stack_smart_home/utils/textstyle.dart';
 
 import 'common_widget.dart';
 
+class RoomBottomSheet extends StatelessWidget {
+  final Widget? child;
+
+  const RoomBottomSheet({Key? key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  child: const BottomSheetWidget());
+            },
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+          );
+        },
+        child: child);
+  }
+}
+
 class BottomSheetWidget extends StatefulWidget {
   const BottomSheetWidget({Key? key}) : super(key: key);
 
@@ -139,7 +163,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                   Flexible(
                       flex: 1,
                       child: appliances(
-                          appliances: APPLIANCES.cooler, status: "on"))
+                          appliances: APPLIANCES.cooler, status: "off"))
                 ],
               )
             ],
@@ -237,7 +261,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                     appliances.title,
                     style: regular.size16.primaryColor,
                   ),
-                  verticalSpace(12.0),
+                  verticalSpace(2.0),
                   Text(
                     status,
                     style: medium.size32.primaryColor,
@@ -252,6 +276,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
                 fit: BoxFit.cover,
                 width: 30,
                 height: 30,
+                color: BrandColor.grey,
               ),
             ),
           ],

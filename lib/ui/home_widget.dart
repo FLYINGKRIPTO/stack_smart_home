@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stack_smart_home/ui/bottom_sheet_widget.dart';
 import 'package:stack_smart_home/ui/music_player_widget.dart';
+import 'package:stack_smart_home/ui/plug_wall_widget.dart';
+import 'package:stack_smart_home/ui/smart_tv_widget.dart';
 import 'package:stack_smart_home/ui/temperature_widget.dart';
 import 'package:stack_smart_home/utils/app_utils.dart';
 import 'package:stack_smart_home/utils/color.dart';
@@ -120,30 +122,10 @@ class HomeWidget extends StatelessWidget {
                 ),
               ),
               horizontalSpace(16.0),
-              Flexible(
+              const Flexible(
                 flex: 1,
                 child: CardWidget(
-                  childWidget: SizedBox(
-                    height: 180,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              StringConstants.plugWall,
-                              style: regular.size20,
-                            ),
-                            const Icon(Icons.keyboard_arrow_right_sharp,
-                                color: BrandColor.white),
-                          ],
-                        ),
-                        verticalSpace(24),
-                      ],
-                    ),
-                  ),
+                  childWidget: PlugWallWidget(),
                 ),
               ),
             ],
@@ -162,11 +144,9 @@ class HomeWidget extends StatelessWidget {
                     childWidget: SizedBox(height: 120, child: MusicPlayer())),
               ),
               horizontalSpace(16.0),
-              Flexible(
+              const Flexible(
                 flex: 1,
-                child: CardWidget(
-                  childWidget: SizedBox(height: 120, child: Container()),
-                ),
+                child: CardWidget(childWidget: SmartTvWidget()),
               ),
             ],
           ),
@@ -177,29 +157,5 @@ class HomeWidget extends StatelessWidget {
 
   Widget _statisticsSection() {
     return Container();
-  }
-}
-
-class RoomBottomSheet extends StatelessWidget {
-  final Widget? child;
-
-  const RoomBottomSheet({Key? key, this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.9,
-                  child: const BottomSheetWidget());
-            },
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-          );
-        },
-        child: child);
   }
 }

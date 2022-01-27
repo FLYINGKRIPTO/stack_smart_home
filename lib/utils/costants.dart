@@ -7,5 +7,6 @@ class StringConstants {
   static const plugWall = "Plug Wall";
   static const homeTemperature = "Home Temperature";
   static const livingRoom = "Living Room";
+  static const smartTv= "Smart Tv";
 
 }
