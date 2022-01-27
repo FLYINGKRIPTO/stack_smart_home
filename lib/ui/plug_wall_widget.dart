@@ -15,7 +15,7 @@ class PlugWallWidget extends StatefulWidget {
 
 class _PlugWallWidgetState extends State<PlugWallWidget> {
   bool _toggle = false;
-Add
+
   final List<PlugWallItem> plugWallItems = [
     PlugWallItem("Macbook Pro", true),
     PlugWallItem("Home Pod", false),
