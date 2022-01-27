@@ -30,7 +30,7 @@ class CardWidget extends StatelessWidget {
           child: childWidget,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(16.0),
+            borderRadius: BorderRadius.circular(24.0),
             boxShadow: const [
               BoxShadow(
                 offset: Offset(2, 2),

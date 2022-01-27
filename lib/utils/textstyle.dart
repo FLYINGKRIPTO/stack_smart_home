@@ -28,6 +28,8 @@ extension StyleExt on TextStyle {
 
   TextStyle get size36 => copyWith(fontSize: 36);
 
+  TextStyle get size40 => copyWith(fontSize: 40);
+
   TextStyle get colorWhite => copyWith(color: Colors.white);
 
   TextStyle get primaryColor => copyWith(color: BrandColor.primaryColor);
