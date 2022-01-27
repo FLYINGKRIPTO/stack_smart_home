@@ -19,3 +19,7 @@ class BrandColor {
   static const Color white = Color(0xfff5f5f6);
   static const Color accent = Color(0xffff9b75);
 }
+
+extension OacityExt on Color {
+  Color get halfOpacity => withOpacity(0.5);
+}

@@ -2,10 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stack_smart_home/ui/meter_widget.dart';
 import 'package:stack_smart_home/utils/color.dart';
+import 'package:stack_smart_home/utils/costants.dart';
 import 'package:stack_smart_home/utils/extensions.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
+
+import 'common_widget.dart';
 
 class BottomSheetWidget extends StatelessWidget {
   const BottomSheetWidget({Key? key}) : super(key: key);
@@ -30,7 +34,47 @@ class BottomSheetWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //_getRadialGauge(),
+              Center(
+                child: Container(
+                  width: 36,
+                  height: 5,
+                  decoration: BoxDecoration(
+                      color: BrandColor.grey.halfOpacity,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(64))),
+                ),
+              ),
+              verticalSpace(12.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        StringConstants.livingRoom,
+                        style: bold.size26.primaryColor,
+                      ),
+                      Text(
+                        "Home temperature",
+                        style: regular.size16.primaryColor,
+                      )
+                    ],
+                  ),
+                  CupertinoSwitch(
+                    value: true,
+                    activeColor: BrandColor.accent,
+                    onChanged: (value) {
+                      // setState(() {
+                      //   _homeScreenView.setHomeTemperatureToggle(value);
+                      // });
+                    },
+                  ),
+                ],
+              ),
+              verticalSpace(12.0),
+              const Center(child: MeterWidget()),
+              verticalSpace(24.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -137,18 +181,7 @@ class BottomSheetWidget extends StatelessWidget {
                 ],
               ),
               verticalSpace(12.0),
-              Row(
-                children: [
-                  Text(
-                    value,
-                    style: bold.size36.primaryColor,
-                  ),
-                  Text(
-                    "°C",
-                    style: regular.size16.primaryColor,
-                  )
-                ],
-              )
+              temperatureTextWidget(temperature: "24"),
             ],
           ),
         ),
@@ -174,7 +207,10 @@ class BottomSheetWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(appliances.title,style: regular.size16.primaryColor,),
+                  Text(
+                    appliances.title,
+                    style: regular.size16.primaryColor,
+                  ),
                   verticalSpace(12.0),
                   Text(
                     status,
@@ -197,4 +233,5 @@ class BottomSheetWidget extends StatelessWidget {
       ),
     );
   }
+
 }

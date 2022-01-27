@@ -171,54 +171,6 @@ class HomeWidget extends StatelessWidget {
             ],
           ),
         ),
-        // GridView(
-        //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //       crossAxisCount: 2, crossAxisSpacing: 16.0, mainAxisSpacing: 16.0),
-        //   shrinkWrap: true,
-        //   children: [
-        //     CardWidget(
-        //       childWidget: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         mainAxisAlignment: MainAxisAlignment.start,
-        //         children: [
-        //           Text(
-        //             StringConstants.homeTemperature,
-        //             style: regular.size20.primaryColor,
-        //           ),
-        //           verticalSpace(16.0),
-        //           const TemperatureWidget(),
-        //         ],
-        //       ),
-        //       isTransparent: false,
-        //     ),
-        //     CardWidget(
-        //       childWidget: Column(
-        //         mainAxisAlignment: MainAxisAlignment.start,
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           Row(
-        //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //             children: [
-        //               Text(
-        //                 StringConstants.plugWall,
-        //                 style: regular.size20,
-        //               ),
-        //               const Icon(Icons.keyboard_arrow_right_sharp,
-        //                   color: BrandColor.white),
-        //             ],
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //     /// Music player
-        //     const CardWidget(
-        //       childWidget: MusicPlayer()
-        //     ),
-        //     CardWidget(
-        //       childWidget: Container(),
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }
@@ -229,30 +181,25 @@ class HomeWidget extends StatelessWidget {
 }
 
 class BottomSheetMy extends StatelessWidget {
- final Widget? child;
-  const BottomSheetMy({Key? key,this.child}) : super(key: key);
+  final Widget? child;
+
+  const BottomSheetMy({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        showModalBottomSheet(
+        onTap: () {
+          showModalBottomSheet(
             context: context,
-            isDismissible: true,
             builder: (context) {
-              return DraggableScrollableSheet(
-                initialChildSize: 0.95,
-                maxChildSize: 0.98,
-                minChildSize: 0.75,
-                builder: (context, scrollController) {
-                  return const BottomSheetWidget();
-                },
-              );
+              return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  child: const BottomSheetWidget());
             },
+            isScrollControlled: true,
             backgroundColor: Colors.transparent,
-        );
-      },
-      child: child
-    );
+          );
+        },
+        child: child);
   }
 }
