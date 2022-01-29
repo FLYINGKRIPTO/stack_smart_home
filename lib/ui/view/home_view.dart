@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:stack_smart_home/usecase/change_home_temp_toggle_usecase.dart';
+import 'package:stack_smart_home/usecase/toggle_home_temp_toggle_usecase.dart';
 import 'package:stack_smart_home/usecase/change_temperature_usecase.dart';
 
 class HomeScreenView {

@@ -6,6 +6,8 @@ import 'package:stack_smart_home/utils/costants.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
 
+import 'common_widget.dart';
+
 class PlugWallWidget extends StatefulWidget {
   const PlugWallWidget({Key? key}) : super(key: key);
 
@@ -47,22 +49,17 @@ class _PlugWallWidgetState extends State<PlugWallWidget> {
                 ),
                 Expanded(
                   child: ListView.separated(
-                    separatorBuilder: (b,c) => verticalSpace(12.0),
+                    separatorBuilder: (b, c) => verticalSpace(12.0),
                     itemCount: plugWallItems.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       final item = plugWallItems[index];
                       return Row(
                         children: [
-                          Container(
-                            width: 5,
-                            height: 5,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: item.value
-                                    ? BrandColor.white
-                                    : BrandColor.white.halfOpacity),
-                          ),
+                          dot(
+                              color: item.value
+                                  ? BrandColor.white
+                                  : BrandColor.white.halfOpacity),
                           horizontalSpace(12.0),
                           Text(
                             item.name,
