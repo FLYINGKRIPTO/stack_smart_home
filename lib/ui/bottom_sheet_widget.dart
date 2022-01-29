@@ -223,6 +223,7 @@ class _BottomSheetWidgetState extends State<BottomSheetWidget> {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [

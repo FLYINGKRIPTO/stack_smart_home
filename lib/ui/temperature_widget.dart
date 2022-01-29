@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/src/provider.dart';
 import 'package:stack_smart_home/providers/home_screen_providers.dart';
 import 'package:stack_smart_home/ui/view/home_view.dart';
 import 'package:stack_smart_home/utils/color.dart';
+import 'package:stack_smart_home/utils/costants.dart';
 import 'package:stack_smart_home/utils/space.dart';
 import 'package:stack_smart_home/utils/textstyle.dart';
 
@@ -31,7 +32,7 @@ class _TemperatureWidgetState extends State<TemperatureWidget> {
       children: [
         Consumer(
           builder: (context, watch, child) {
-            AsyncValue<int> value = watch(getCurrentTemperatureStreamProviderd);
+            AsyncValue<int> value = watch(getCurrentTemperatureStreamProvider);
             return value.when(data: (value) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -45,7 +46,7 @@ class _TemperatureWidgetState extends State<TemperatureWidget> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 4.0),
                       child: Text(
-                        "°C",
+                        StringConstants.degreeCelcius,
                         style: regular.size24.primaryColor,
                       ),
                     ),

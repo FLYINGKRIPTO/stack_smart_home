@@ -103,7 +103,6 @@ class HomeWidget extends StatelessWidget {
                 child: CardWidget(
                   childWidget: RoomBottomSheet(
                     child: SizedBox(
-                      height: 180,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,

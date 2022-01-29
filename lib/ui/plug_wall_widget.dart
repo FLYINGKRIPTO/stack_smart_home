@@ -19,7 +19,7 @@ class _PlugWallWidgetState extends State<PlugWallWidget> {
   final List<PlugWallItem> plugWallItems = [
     PlugWallItem("Macbook Pro", true),
     PlugWallItem("Home Pod", false),
-    PlugWallItem("PlayStation 5", true),
+    PlugWallItem("PlayStation 5", true)
   ];
 
   @override
@@ -30,27 +30,29 @@ class _PlugWallWidgetState extends State<PlugWallWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    StringConstants.plugWall,
-                    style: regular.size20,
-                  ),
-                  const Icon(Icons.keyboard_arrow_right_sharp,
-                      color: BrandColor.white),
-                ],
-              ),
-              ListView.builder(
-                itemCount: plugWallItems.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  final item = plugWallItems[index];
-                  return Column(
-                    children: [
-                      Row(
+          Expanded(
+            flex: 5,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      StringConstants.plugWall,
+                      style: regular.size20,
+                    ),
+                    const Icon(Icons.keyboard_arrow_right_sharp,
+                        color: BrandColor.white),
+                  ],
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (b,c) => verticalSpace(12.0),
+                    itemCount: plugWallItems.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final item = plugWallItems[index];
+                      return Row(
                         children: [
                           Container(
                             width: 5,
@@ -67,23 +69,26 @@ class _PlugWallWidgetState extends State<PlugWallWidget> {
                             style: regular.size12,
                           ),
                         ],
-                      ),
-                      verticalSpace(8.0),
-                    ],
-                  );
-                },
-              ),
-            ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-          CupertinoSwitch(
-            value: _toggle,
-            activeColor: BrandColor.accent,
-            trackColor: "#B3AFAC".fromHexToColor(),
-            onChanged: (value) {
-              setState(() {
-                _toggle = value;
-              });
-            },
+          verticalSpace(24.0),
+          Expanded(
+            flex: 1,
+            child: CupertinoSwitch(
+              value: _toggle,
+              activeColor: BrandColor.accent,
+              trackColor: "#B3AFAC".fromHexToColor(),
+              onChanged: (value) {
+                setState(() {
+                  _toggle = value;
+                });
+              },
+            ),
           )
         ],
       ),

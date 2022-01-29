@@ -24,7 +24,7 @@ class MeterWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
-                child: temperatureTextWidget2(temperature: "14"),
+                child: meterTemperatureTextWidget(temperature: "14"),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -42,7 +42,7 @@ class MeterWidget extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(left:  8.0),
-                child: temperatureTextWidget2(temperature: "28"),
+                child: meterTemperatureTextWidget(temperature: "28"),
               ),
             ],
           ),
@@ -70,7 +70,7 @@ class MeterWidget extends StatelessWidget {
                 child:
                 Consumer(
                   builder: (context, watch, child) {
-                    AsyncValue<int> value = watch(getCurrentTemperatureStreamProviderd);
+                    AsyncValue<int> value = watch(getCurrentTemperatureStreamProvider);
                     return value.when(data: (value) {
                       return temperatureTextWidget(temperature: "$value", center: true);
                     }, loading: () =>
