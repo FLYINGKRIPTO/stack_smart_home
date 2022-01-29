@@ -26,17 +26,17 @@ class HomeWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _greetingSection(),
-            _roomSectionGridView(context),
+            _greetingSection,
+            _roomSectionGridView,
             verticalSpace(24.0),
-            _statisticsSection()
+            _statisticsSection,
           ],
         ),
       ),
     );
   }
 
-  Widget _greetingSection() {
+  Widget get _greetingSection {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,7 +80,7 @@ class HomeWidget extends StatelessWidget {
     );
   }
 
-  Widget _roomSectionGridView(BuildContext context) {
+  Widget get _roomSectionGridView {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,69 +92,61 @@ class HomeWidget extends StatelessWidget {
           style: regular.size20,
         ),
         verticalSpace(16.0),
-        Flexible(
-          flex: 3,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                flex: 1,
-                child: CardWidget(
-                  childWidget: RoomBottomSheet(
-                    child: SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            StringConstants.homeTemperature,
-                            style: regular.size20.primaryColor,
-                          ),
-                          verticalSpace(16.0),
-                          const TemperatureWidget(),
-                        ],
-                      ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Flexible(
+              flex: 1,
+              child: CardWidget(
+                childWidget: RoomBottomSheet(
+                  child: SizedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          StringConstants.homeTemperature,
+                          style: regular.size20.primaryColor,
+                        ),
+                        verticalSpace(16.0),
+                        const TemperatureWidget(),
+                      ],
                     ),
                   ),
-                  isTransparent: false,
                 ),
+                isTransparent: false,
               ),
-              horizontalSpace(16.0),
-              const Flexible(
-                flex: 1,
-                child: CardWidget(
-                  childWidget: PlugWallWidget(),
-                ),
+            ),
+            horizontalSpace(16.0),
+            const Flexible(
+              flex: 1,
+              child: CardWidget(
+                childWidget: PlugWallWidget(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         verticalSpace(16.0),
-        Flexible(
-          flex: 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Flexible(
-                flex: 1,
-                child: CardWidget(
-                    childWidget: SizedBox(height: 120, child: MusicPlayer())),
-              ),
-              horizontalSpace(16.0),
-              const Flexible(
-                flex: 1,
-                child: CardWidget(childWidget: SmartTvWidget()),
-              ),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Flexible(
+              child: CardWidget(
+                  childWidget:  MusicPlayer()),
+            ),
+            horizontalSpace(16.0),
+            const Flexible(
+              child: CardWidget(childWidget: SmartTvWidget()),
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _statisticsSection() {
+  Widget get _statisticsSection {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         fit: StackFit.expand,
         children: <Widget>[
           Image.asset(
-            JpgIcons.background,
+            JpgIcons.bg,
             fit: BoxFit.cover,
           ),
           Positioned.fill(
@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          HomeWidget(),
+          const HomeWidget(),
         ],
       ));
 }

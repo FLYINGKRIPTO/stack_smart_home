@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,41 +24,45 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        StreamBuilder<Playing?>(
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              return albumArtWidget(
-                  snapshot.data?.audio.audio.metas.image?.path ?? "",
-                  snapshot.data?.audio.audio.metas.title ?? "",
-                  snapshot.data?.audio.audio.metas.artist ?? "");
-            }
-            return const CircularProgressIndicator(
-              color: BrandColor.accent,
-            );
-          },
-          stream: _assetsAudioPlayer.current,
-        ),
-        verticalSpace(16.0),
-        playerControlWidget(
-          onPreviousPressed: () {
-            _assetsAudioPlayer.previous();
-          },
-          onPlayPausePressed: () {
-            final bool playing = _assetsAudioPlayer.isPlaying.value;
-            if (playing) {
-              _assetsAudioPlayer.pause();
-            } else {
-              _assetsAudioPlayer.play();
-            }
-          },
-          onNextPressed: () {
-            _assetsAudioPlayer.next();
-          },
-        )
-      ],
+    return SizedBox(
+      height: 120,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          StreamBuilder<Playing?>(
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                return albumArtWidget(
+                    snapshot.data?.audio.audio.metas.image?.path ?? "",
+                    snapshot.data?.audio.audio.metas.title ?? "",
+                    snapshot.data?.audio.audio.metas.artist ?? "");
+              }
+              return const CircularProgressIndicator(
+                color: BrandColor.accent,
+              );
+            },
+            stream: _assetsAudioPlayer.current,
+          ),
+          verticalSpace(16.0),
+          playerControlWidget(
+            onPreviousPressed: () {
+              _assetsAudioPlayer.previous();
+            },
+            onPlayPausePressed: () {
+              final bool playing = _assetsAudioPlayer.isPlaying.value;
+              if (playing) {
+                _assetsAudioPlayer.pause();
+              } else {
+                _assetsAudioPlayer.play();
+              }
+            },
+            onNextPressed: () {
+              _assetsAudioPlayer.next();
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -72,7 +74,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
       child: Row(
         children: [
           Expanded(
-            flex: 1,
             child: IconButton(
               icon: const Icon(
                 Icons.skip_previous,
@@ -83,28 +84,18 @@ class _MusicPlayerState extends State<MusicPlayer> {
           ),
           _assetsAudioPlayer.builderIsPlaying(builder: (context, isPlaying) {
             return Expanded(
-              flex: 1,
               child: SizedBox(
                 width: 48,
                 height: 48,
                 child: Container(
-                  child: isPlaying
-                      ? IconButton(
-                          icon: const Icon(
-                            Icons.pause,
-                            color: BrandColor.white,
-                            size: 28,
-                          ),
-                          onPressed: onPlayPausePressed,
-                        )
-                      : IconButton(
-                          icon: const Icon(
-                            Icons.play_arrow,
-                            color: BrandColor.white,
-                            size: 28,
-                          ),
-                          onPressed: onPlayPausePressed,
-                        ),
+                  child: IconButton(
+                    icon: Icon(
+                      isPlaying ? Icons.pause : Icons.play_arrow,
+                      color: BrandColor.white,
+                      size: 28,
+                    ),
+                    onPressed: onPlayPausePressed,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                     color: "#B3AFAC".fromHexToColor().withOpacity(0.6),
@@ -114,7 +105,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
             );
           }),
           Expanded(
-            flex: 1,
             child: IconButton(
               icon: const Icon(
                 Icons.skip_next,
@@ -143,8 +133,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
               JpgIcons.background,
               height: 30,
               width: 30,
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
+            cacheHeight: 100,
+            cacheWidth: 100,
           ),
         ),
         horizontalSpace(8.0),
